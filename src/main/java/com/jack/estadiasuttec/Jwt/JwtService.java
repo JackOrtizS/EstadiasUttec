@@ -53,7 +53,7 @@ public class JwtService {
     private Claims getAllClaims(String token) {
         return Jwts
                 .parserBuilder()
-                .setSigningKey(getKey())  // Define la clave secreta para verificar la firma del token
+                .setSigningKey(getKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
