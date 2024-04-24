@@ -20,8 +20,4 @@ public class AuthController {
         return ResponseEntity.ok(authService.register(request));
     }
 
-    @GetMapping(value = "prueba")
-    public String prueba(){
-        return "Hola";
-    }
 }

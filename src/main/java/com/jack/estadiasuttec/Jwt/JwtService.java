@@ -24,21 +24,20 @@ public class JwtService {
         return getToken(new HashMap<>(), user);
     }
 
-    // Método privado para generar un token JWT con reclamaciones adicionales
     private String getToken(Map<String, Object> extraClaims, UserDetails user) {
         return Jwts
                 .builder()
-                .setClaims(extraClaims)                // Define reclamaciones adicionales
-                .setSubject(user.getUsername())         // Define el sujeto del token como el nombre de usuario
-                .setIssuedAt(new Date(System.currentTimeMillis()))  // Define la fecha de emisión del token
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))  // Define la fecha de expiración del token (24 horas)
-                .signWith(getKey(), SignatureAlgorithm.HS256)  // Firma el token con el algoritmo HS256 y la clave secreta
+                .setClaims(extraClaims)
+                .setSubject(user.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+                .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
     private Key getKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);  // Decodifica la clave secreta de Base64
-        return Keys.hmacShaKeyFor(keyBytes);  // Crea una clave HMAC a partir de los bytes decodificados
+        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        return Keys.hmacShaKeyFor(keyBytes);
 
     }
 

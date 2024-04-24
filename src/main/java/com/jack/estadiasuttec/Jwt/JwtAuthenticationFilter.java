@@ -21,11 +21,9 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    //Inyeccion de dependencias
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
 
-    // Método para filtrar las peticiones
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         final String token = getTokenFromRequest(request);

@@ -22,17 +22,13 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
 
     public AuthResponse login(LoginRequest request) {
-        // Autentica el usuario utilizando el AuthenticationManager
         authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(request.getMatricula(), request.getPassword()));
 
-        // Busca el usuario por nombre de usuario y obtiene sus detalles
         UserDetails user = userRepository.findByMatricula(request.getMatricula()).orElseThrow();
 
-        // Genera un token JWT para el usuario
         String token = jwtService.getToken(user);
 
-        // Construye y devuelve una respuesta con el token JWT
         return AuthResponse.builder()
                 .token(token)
                 .build();

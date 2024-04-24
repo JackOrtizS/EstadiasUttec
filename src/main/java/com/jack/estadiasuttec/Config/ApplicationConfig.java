@@ -22,26 +22,21 @@ public class ApplicationConfig {
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-        // Obtiene el AuthenticationManager de AuthenticationConfiguration
         return config.getAuthenticationManager();
     }
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
-        // Crea un DaoAuthenticationProvider
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
 
-        // Configura el UserDetailsService
         authenticationProvider.setUserDetailsService(userDetailService());
 
-        // Configura el PasswordEncoder
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        // Crea y devuelve un BCryptPasswordEncoder
         return new BCryptPasswordEncoder();
     }
     @Bean
